@@ -98,7 +98,7 @@ describe("Scrabble Scorer solution", function() {
 		expect(solution.vowelBonusScorer('i')).toBe(3);
 		expect(solution.vowelBonusScorer('o')).toBe(3);
 		expect(solution.vowelBonusScorer('u')).toBe(3);
-
+		
 		expect(solution.vowelBonusScorer('ae')).toBe(6);
 		expect(solution.vowelBonusScorer('aei')).toBe(9);
 	});

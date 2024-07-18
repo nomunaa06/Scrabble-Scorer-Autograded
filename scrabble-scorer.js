@@ -35,15 +35,35 @@ function oldScrabbleScorer(word) {
 function initialPrompt() {
    console.log("Let's play some scrabble!\n");
    let wordFromUser = input.question("Enter a word to score: ");
-   //let allowedEntry ="qwertyuiopasdfghjklzxcvbnm ";
-   
+   while(!containsOnlyAlphabet(wordFromUser)){
+      wordFromUser = input.question("Invalid Entry! Enter a word without symbols or numbers: ");
+   }
    return wordFromUser;
 };
 
+function containsOnlyAlphabet(str){
+let allowedEntry ="qwertyuiopasdfghjklzxcvbnm ";
+for (let i=0; i<str.length; i++){
+   if(!allowedEntry.includes(str[i].toLowerCase())){
+      return false;
+   }
+}
+return true;
+};
+
+
 let newPointStructure = transform(oldPointStructure);
+newPointStructure[' '] = 0;
 
 let simpleScorer = function(word){
-   return word.length;
+   let score =0;
+   for(let i=0;i<word.length; i++){
+      score +=1;
+      if(word[i]===' '){
+         score-=1;
+      }
+   }
+   return score;
 };
 
 let vowelBonusScorer=function(word){
@@ -55,6 +75,9 @@ let vowelBonusScorer=function(word){
          word[i].toUpperCase()==='O'||
          word[i].toUpperCase()==='U'){
          vowelScore += 3;
+      }
+      else if(word[i]===' '){
+         vowelScore +=0;
       }
       else{
          vowelScore +=1;
